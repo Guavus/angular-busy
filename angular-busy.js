@@ -135,8 +135,8 @@ angular.module('cgBusy').directive('cgBusy',['cgBusyDefaults', '_cgBusyTrackerFa
                     wrapperClass: 'cg-busy srx-busy' 
                 };
                 angular.extend(defaults,cgBusyDefaults);
-                element.addClass('srx-busy white cg-busy ' + defaults.style);
-                scope.$watchCollection(attrs.cgBusy,function(options) {
+                element.addClass(defaults.wrapperClass + ' ' + defaults.style);
+                scope.$watchCollection(attrs.cgBusy, function(options) {
                     if (!options) {
                         options = {promise:null};
                     }
@@ -258,7 +258,6 @@ angular.module('cgBusy').directive('cgBusyDeprecated',['$compile','$templateCach
                         currentTemplate = options.templateUrl;
 
                         $http.get(currentTemplate,{cache: $templateCache}).then(function(indicatorTemplate){
-                            console.log(indicatorTemplate);
                             var template = '<div class="'+options.wrapperClass+'" ng-class="$cgBusyIsActive() ? \'busy\' : \'\'">' + indicatorTemplate.data + '</div>';
                             templateElement = $compile(template)(templateScope);
 
